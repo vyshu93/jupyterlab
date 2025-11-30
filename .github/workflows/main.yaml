@@ -23,7 +23,7 @@ jobs:
         # Set up the JavaScript/TypeScript environment
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
 
       - name: 📦 Install Project Dependencies
         # Install packages before scanning
