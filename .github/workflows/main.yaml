@@ -23,11 +23,11 @@ jobs:
         # Set up the JavaScript/TypeScript environment
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: 📦 Install Project Dependencies
         # Install packages before scanning
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps --ignore-scripts
 
       - name: 🛡️ SonarCloud Analysis (DevSecOps Step)
         # The mandatory security scan
