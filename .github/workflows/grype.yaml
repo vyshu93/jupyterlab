@@ -17,10 +17,15 @@ jobs:
         
       - name: ⬇️ Install Grype CLI (To Global Path)
         # Install Grype directly to /usr/local/bin which is guaranteed to be in the PATH
+        # FIX: Specify the version (v0.97.1) to avoid calling the failing /latest API
         run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo sh -s -- -b /usr/local/bin
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo sh -s -- -b /usr/local/bin v0.97.1
           grype version # Verify installation
           
+      - name: Run Grype scan (table output)
+        run: grype . -o table --add-cpes-if-none
+
+
       - name: 🔎 Run Grype Scan (No Failure)
         # The scan will run, generate the report, and exit successfully (code 0), 
         # regardless of the number or severity of vulnerabilities found.
