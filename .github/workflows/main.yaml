@@ -28,7 +28,7 @@ jobs:
           node-version: '20'
 
       # - name: 📦 Install Node Dependencies
-        run: npm install --legacy-peer-deps --ignore scripts
+        # run: npm install --legacy-peer-deps --ignore scripts
 
 
       - name: 🛡️ SonarCloud Scan
