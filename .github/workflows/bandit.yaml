@@ -1,0 +1,33 @@
+# .github/workflows/bandit.yaml
+name: 🐍 DevSecOps - Python SAST (Bandit)
+
+# This workflow will run anytime code is pushed to the main branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  bandit_scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        # We need the Python source files for scanning
+        uses: actions/checkout@v4
+        
+      - name: 🐍 Install Python Environment
+        # Sets up a Python environment on the runner
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+
+      - name: 🛡️ Install Bandit Tool
+        # Installs the Bandit security tool
+        run: pip install bandit
+
+      - name: 🔎 Run Bandit Scan
+        # Scans all files recursively, outputs to JSON.
+        # The '|| true' ensures the pipeline does not stop if findings are present.
+        run: bandit -r . -f json -o bandit-report.json || true
